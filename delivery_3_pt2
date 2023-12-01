@@ -1,0 +1,39 @@
+import netmiko
+from netmiko import ConnectHandler
+
+iosv_12 = {
+    'device_type' : 'cisco_ios',
+    'ip' :  '192.168.56.101',
+    'username' : 'prne',
+    'password' : 'cisco123!',
+    'secret' : 'class123!',
+
+}
+
+net_connect =ConnectHandler(**iosv_12)
+net_connect.enable()
+output = net_connect.send_config_set(['configure terminal', 'router ospf 1','network 192.168.56.101 255.255.255.0 area 0','show ip ospf neighbour'])
+print(output)
+output = net_connect.send_command('show ip ospf neighbour')
+
+
+#config_commands = ['router ospf 1','network 192.168.56.101 255.255.255.0 area 0','show ip ospf neighbour']
+#output = net_connect.send_config_set(config_commands)
+#print(output)
+
+
+iosv_13 = {
+    'device_type' : 'cisco_ios',
+    'ip' :  '192.168.56.130',
+    'username' : 'prne',
+    'password' : 'cisco123!',
+    'secret' : 'class123!',
+
+}
+
+net_connect =ConnectHandler(**iosv_13)
+net_connect.enable()
+output2 = net_connect.send_command('show ip ospf neighbour')
+print(output2)
+
+output2 = net_connect.send_config_set(['configure terminal', 'router ospf 1','network 192.168.56.101 255.255.255.0 area 0',])
